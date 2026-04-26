@@ -1,9 +1,12 @@
 import HomePage from "./pages/HomePage.tsx";
+import { useState } from "react";
 
 function App() {
-  return (
+    const [isDark, setIsDark] = useState(false);
+
+    return (
     <>
-        <HomePage/>
+        <HomePage isDark={isDark} setIsDark={setIsDark} />
     </>
   )
 }

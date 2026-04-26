@@ -1,3 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet:wght,ELSH@100..900,2&display=swap');
+
+:root {
+  --window-bg: white;
+  --window-border: #1762E0;
+  --header-bg: #1762E0;
+  --text-main: #252525;
+  --footer-bg: #1762E0;
+  --header-border: none;
+  --icon-filter: none;
+}
+
+body.dark {
+  --window-bg: #222831;
+  --window-border: #FFFFFF;
+  --header-bg: #171717;
+  --text-main: #ffffff;
+  --footer-bg: #162133;
+  --header-border: solid 1px white;
+  --icon-filter: brightness(0) invert(1);
+  background-image: url("/images/bg_dark-mode.svg");
+}
+
+@mixin center-container {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  margin: 0;
+  padding: 0;
+  // outline: 4px solid green !important;
+}
+
 body{
-  background-color: blue;
+  background-image: url("/images/bg_light-mode.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  @include center-container;
+  flex: 1; // Заставляет занять все свободное место
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer{
+  @include center-container;
+  padding: 11px 50px;
+  box-sizing: border-box;
+  background-color: var(--footer-bg);
+  display: flex;
+  gap: 0 25px;
+}
+
+footer button{
+  background: none;
+  border: none;
+}
+
+footer button img{
+  filter: var(--icon-filter);
 }
