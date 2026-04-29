@@ -1,4 +1,5 @@
 import Footer from "../components/Footer.tsx";
+import WindowContainer from "../components/WindowContainer.tsx";
 
 type Props = {
     isDark: boolean;
@@ -9,7 +10,7 @@ function HomePage({ isDark, setIsDark }: Props){
     return(
         <>
             <main>
-                <section className="window">
+                <WindowContainer>
                     <div className="window__header">
                         <h2>главная</h2>
                     </div>
@@ -37,7 +38,7 @@ function HomePage({ isDark, setIsDark }: Props){
                             </button>
                         </div>
                     </div>
-                </section>
+                </WindowContainer>
             </main>
             <Footer isDark={isDark} setIsDark={setIsDark} />
         </>
