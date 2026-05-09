@@ -7,10 +7,25 @@
 }
 
 .window__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px 25px;
   background-color:  var(--header-bg);
   border-radius: 4px 4px 0 0;
   border-bottom: var(--header-border);
+}
+
+.window__header button{
+  padding: 0 7px;
+  font-family: "Handjet", sans-serif;
+  font-size: 20px;
+  color: white;
+  background: linear-gradient(90deg,rgba(227, 102, 67, 1) 0%, rgba(198, 54, 10, 1) 100%);;
+  border: 1px solid white;
+  border-radius: 2px;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .window__header h2{

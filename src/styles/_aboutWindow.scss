@@ -1,0 +1,59 @@
+.about__window {
+  position: absolute;
+  top: 150px;
+  left: 200px;
+
+  z-index: 100;
+
+  cursor: default;
+}
+
+#about{
+  cursor: grab;
+}
+
+.drag-handle {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.window__header:active {
+  cursor: grabbing;
+}
+
+.about__header{
+  padding: 30px 25px;
+  display: flex;
+  align-items: center;
+  gap: 0 35px;
+}
+
+.about__header image{
+  height: 120px;
+  width: 120px;
+}
+
+.about__header--information{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.about__header--information h3{
+  color: #FF8C42;
+  font-family: "Handjet", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+.about__header--information p{
+  color: var(--text-main);
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.about__header--information span{
+  color: #0AC300;
+}

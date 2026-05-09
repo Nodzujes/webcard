@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Handjet:wght,ELSH@100..900,2&display=swap");
 :root {
   --window-bg: white;
@@ -18,6 +19,12 @@ body.dark {
   --header-border: solid 1px white;
   --icon-filter: brightness(0) invert(1);
   background-image: url("/images/bg_dark-mode.svg");
+}
+
+html, body, #root, main {
+  overflow: hidden; /* главное */
+  width: 100%;
+  height: 100%;
 }
 
 * {
@@ -42,6 +49,7 @@ html, body, #root {
 }
 
 main {
+  position: relative;
   max-width: 1920px;
   width: 100%;
   margin: 0 auto;
@@ -80,10 +88,25 @@ footer button img {
 }
 
 .window__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 15px 25px;
   background-color: var(--header-bg);
   border-radius: 4px 4px 0 0;
   border-bottom: var(--header-border);
+}
+
+.window__header button {
+  padding: 0 7px;
+  font-family: "Handjet", sans-serif;
+  font-size: 20px;
+  color: white;
+  background: linear-gradient(90deg, rgb(227, 102, 67) 0%, rgb(198, 54, 10) 100%);
+  border: 1px solid white;
+  border-radius: 2px;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .window__header h2 {
@@ -143,6 +166,64 @@ h1 span {
   font-family: "Roboto", sans-serif;
   font-weight: 500;
   font-size: 16px;
+}
+
+.about__window {
+  position: absolute;
+  top: 150px;
+  left: 200px;
+  z-index: 100;
+  cursor: default;
+}
+
+#about {
+  cursor: grab;
+}
+
+.drag-handle {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.window__header:active {
+  cursor: grabbing;
+}
+
+.about__header {
+  padding: 30px 25px;
+  display: flex;
+  align-items: center;
+  gap: 0 35px;
+}
+
+.about__header image {
+  height: 120px;
+  width: 120px;
+}
+
+.about__header--information {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.about__header--information h3 {
+  color: #FF8C42;
+  font-family: "Handjet", sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  text-transform: uppercase;
+}
+
+.about__header--information p {
+  color: var(--text-main);
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.about__header--information span {
+  color: #0AC300;
 }
 
 /*# sourceMappingURL=main.css.map */
