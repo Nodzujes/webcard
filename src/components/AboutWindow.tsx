@@ -11,10 +11,15 @@ function AboutWindow({ onClose, position }: Props){
     id: "about-window",
   });
 
-  const style = {
-    transform: `translate(${position.x + (transform?.x || 0)}px, ${
-      position.y + (transform?.y || 0)
-    }px)`,
+  const style: React.CSSProperties = {
+    position: "absolute",
+    top: position.y,
+    left: position.x,
+    // transform только во время драга
+    transform: transform
+      ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
+      : undefined,
+    zIndex: 100,
   };
 
   return(

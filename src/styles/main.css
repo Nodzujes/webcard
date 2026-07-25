@@ -172,9 +172,6 @@ h1 span {
 }
 
 .about__window {
-  position: absolute;
-  top: 150px;
-  left: 200px;
   z-index: 100;
   cursor: default;
 }

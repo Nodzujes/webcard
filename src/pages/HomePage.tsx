@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {DndContext} from "@dnd-kit/core";
+import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import Footer from "../components/Footer.tsx";
 import WindowContainer from "../components/WindowContainer.tsx";
 import AboutWindow from "../components/AboutWindow.tsx";
@@ -13,18 +14,18 @@ function HomePage({isDark, setIsDark}: Props) {
 
   const [isAboutOpen, setIsAboutOpen] = useState(false);
 
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 200, y: 150 });
 
   return (
     <>
       <main>
-        <DndContext onDragEnd={(event) => {
-          const { delta } = event;
-
-          setPosition((prev) => ({
-            x: prev.x + delta.x,
-            y: prev.y + delta.y,
-          }));
+        <DndContext
+          modifiers={[restrictToWindowEdges]}
+          onDragEnd={({ delta }) => {
+            setPosition((prev) => ({
+              x: prev.x + delta.x,
+              y: prev.y + delta.y,
+            }));
         }}>
           <WindowContainer>
             <div className="window__header">
