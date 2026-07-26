@@ -4,6 +4,7 @@ import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import Footer from "../components/Footer.tsx";
 import WindowContainer from "../components/WindowContainer.tsx";
 import AboutWindow from "../components/AboutWindow.tsx";
+import LinksWindow from "../components/LinksWindow.tsx";
 
 type Props = {
   isDark: boolean;
@@ -13,19 +14,52 @@ type Props = {
 function HomePage({isDark, setIsDark}: Props) {
 
   const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isLinksOpen, setIsLinksOpen] = useState(false);
 
-  const [position, setPosition] = useState({ x: 200, y: 150 });
+  const [aboutPosition, setAboutPosition] = useState({ x: 200, y: 150 });
+  const [linksPosition, setLinksPosition] = useState({ x: 450, y: 210 });
+
+  // z-index каждого окна
+  const [aboutZ, setAboutZ] = useState(100);
+  const [linksZ, setLinksZ] = useState(100);
+
+  // Счётчик самого верхнего слоя
+  const [topZ, setTopZ] = useState(100);
+
+  // Функция: поднять окно наверх
+  const bringToFront = (window: "about" | "links") => {
+    const newZ = topZ + 1;
+    setTopZ(newZ);
+
+    if (window === "about") setAboutZ(newZ);
+    if (window === "links") setLinksZ(newZ);
+  };
 
   return (
     <>
       <main>
         <DndContext
           modifiers={[restrictToWindowEdges]}
-          onDragEnd={({ delta }) => {
-            setPosition((prev) => ({
-              x: prev.x + delta.x,
-              y: prev.y + delta.y,
-            }));
+          onDragStart={({ active }) => {
+            // При начале перетаскивания поднимаем окно
+            if (active.id === "about-window") bringToFront("about");
+            if (active.id === "links-window") bringToFront("links");
+          }}
+          onDragEnd={({ delta, active }) => {
+            // Смотрим, какое именно окно двигали
+            if (active.id === "about-window") {
+              setAboutPosition((prev) => ({
+                x: prev.x + delta.x,
+                y: prev.y + delta.y,
+              }));
+            }
+
+            if (active.id === "links-window") {
+              setLinksPosition((prev) => ({
+                x: prev.x + delta.x,
+                y: prev.y + delta.y,
+              }));
+            }
         }}>
           <WindowContainer>
             <div className="window__header">
@@ -37,11 +71,11 @@ function HomePage({isDark, setIsDark}: Props) {
                 <p>fullstack developer, designer</p>
               </div>
               <div className="window__btn">
-                <button onClick={() => setIsAboutOpen(true)}>
+                <button onClick={() => { setIsAboutOpen(true); bringToFront("about"); }}>
                   <img src={isDark ? "/icons/account-dark.svg" : "/icons/account-light.svg"} alt="picture" />
                   <span>обо мне</span>
                 </button>
-                <button>
+                <button onClick={() => { setIsLinksOpen(true); bringToFront("links"); }}>
                   <img src={isDark ? "/icons/link-dark.svg" : "/icons/link-light.svg"} alt="picture" />
                   <span>ссылки</span>
                 </button>
@@ -59,7 +93,16 @@ function HomePage({isDark, setIsDark}: Props) {
           {isAboutOpen && (
             <AboutWindow
               onClose={() => setIsAboutOpen(false)}
-              position={position}
+              position={aboutPosition}
+              zIndex={aboutZ}
+            />
+          )}
+          {isLinksOpen && (
+            <LinksWindow
+              onClose={() => setIsLinksOpen(false)}
+              position={linksPosition}
+              zIndex={linksZ}
+              isDark={isDark}
             />
           )}
         </DndContext>

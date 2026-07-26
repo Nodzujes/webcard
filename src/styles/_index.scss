@@ -9,6 +9,8 @@
   --header-border: none;
   --icon-filter: none;
   --scroll-color: #CDCDCD;
+  --inf-block-bg: #FFF8E0;
+  --inf-block-txt: #424242;
 }
 
 body.dark {
@@ -21,6 +23,8 @@ body.dark {
   --icon-filter: brightness(0) invert(1);
   background-image: url("/images/bg_dark-mode.svg");
   --scroll-color: #CDCDCD;
+  --inf-block-bg: #3F808D;
+  --inf-block-txt: #FFFFFF;
 }
 
 @mixin center-container {

@@ -9,6 +9,8 @@
   --header-border: none;
   --icon-filter: none;
   --scroll-color: #CDCDCD;
+  --inf-block-bg: #FFF8E0;
+  --inf-block-txt: #424242;
 }
 
 body.dark {
@@ -21,6 +23,8 @@ body.dark {
   --icon-filter: brightness(0) invert(1);
   background-image: url("/images/bg_dark-mode.svg");
   --scroll-color: #CDCDCD;
+  --inf-block-bg: #3F808D;
+  --inf-block-txt: #FFFFFF;
 }
 
 html, body, #root, main {
@@ -173,10 +177,9 @@ h1 span {
 
 .about__window {
   z-index: 100;
-  cursor: default;
 }
 
-#about {
+#about, #links {
   cursor: grab;
 }
 
@@ -236,7 +239,7 @@ h1 span {
   gap: 30px 0;
 }
 .about__body::-webkit-scrollbar {
-  width: 5px;
+  width: 6px;
 }
 .about__body::-webkit-scrollbar-track {
   background: none;
@@ -294,6 +297,42 @@ h4 {
 
 .special__сase span {
   color: #FF8C42;
+}
+
+.modal__wrapper {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 21px;
+  gap: 19px 19px;
+}
+
+.modal__wrappers--links {
+  display: flex;
+  justify-content: space-between;
+  gap: 31px;
+}
+
+.modal__wrappers--links a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-main);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.modal__wrappers--txt {
+  background-color: var(--inf-block-bg);
+  padding: 24px 24px;
+  color: var(--inf-block-txt);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  border-radius: 5px;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -4,11 +4,9 @@
 //  left: 200px;
 
   z-index: 100;
-
-  cursor: default;
 }
 
-#about{
+#about, #links {
   cursor: grab;
 }
 
@@ -68,7 +66,7 @@
   gap: 30px 0;
 
   &::-webkit-scrollbar {
-    width: 5px;
+    width: 6px;
   }
 
   &::-webkit-scrollbar-track {

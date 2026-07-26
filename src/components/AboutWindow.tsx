@@ -4,9 +4,10 @@ import WindowContainer from "./WindowContainer.tsx";
 type Props = {
   onClose: () => void;
   position: { x: number; y: number };
+  zIndex: number;
 };
 
-function AboutWindow({ onClose, position }: Props){
+function AboutWindow({ onClose, position, zIndex }: Props){
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: "about-window",
   });
@@ -19,7 +20,7 @@ function AboutWindow({ onClose, position }: Props){
     transform: transform
       ? `translate3d(${transform.x}px, ${transform.y}px, 0)`
       : undefined,
-    zIndex: 100,
+    zIndex: zIndex,
   };
 
   return(
