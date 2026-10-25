@@ -4,6 +4,7 @@ import { restrictToWindowEdges } from "@dnd-kit/modifiers";
 import Footer from "../components/Footer.tsx";
 import WindowContainer from "../components/WindowContainer.tsx";
 import AboutWindow from "../components/AboutWindow.tsx";
+import WorksWindow from "../components/WorksWindow.tsx";
 import LinksWindow from "../components/LinksWindow.tsx";
 
 type Props = {
@@ -15,24 +16,28 @@ function HomePage({isDark, setIsDark}: Props) {
 
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const [isLinksOpen, setIsLinksOpen] = useState(false);
+  const [isWorksOpen, setIsWorksOpen] = useState(false);
 
   const [aboutPosition, setAboutPosition] = useState({ x: 200, y: 150 });
   const [linksPosition, setLinksPosition] = useState({ x: 450, y: 210 });
+  const [worksPosition, setWorksPosition] = useState({ x: 300, y: 180 });
 
   // z-index каждого окна
   const [aboutZ, setAboutZ] = useState(100);
   const [linksZ, setLinksZ] = useState(100);
+  const [worksZ, setWorksZ] = useState(100);
 
   // Счётчик самого верхнего слоя
   const [topZ, setTopZ] = useState(100);
 
   // Функция: поднять окно наверх
-  const bringToFront = (window: "about" | "links") => {
+  const bringToFront = (window: "about" | "links" | "works") => {
     const newZ = topZ + 1;
     setTopZ(newZ);
 
     if (window === "about") setAboutZ(newZ);
     if (window === "links") setLinksZ(newZ);
+    if (window === "works") setWorksZ(newZ);
   };
 
   return (
@@ -44,6 +49,8 @@ function HomePage({isDark, setIsDark}: Props) {
             // При начале перетаскивания поднимаем окно
             if (active.id === "about-window") bringToFront("about");
             if (active.id === "links-window") bringToFront("links");
+            if (active.id === "works-window") bringToFront("works");
+
           }}
           onDragEnd={({ delta, active }) => {
             // Смотрим, какое именно окно двигали
@@ -56,6 +63,13 @@ function HomePage({isDark, setIsDark}: Props) {
 
             if (active.id === "links-window") {
               setLinksPosition((prev) => ({
+                x: prev.x + delta.x,
+                y: prev.y + delta.y,
+              }));
+            }
+
+            if (active.id === "works-window") {
+              setWorksPosition((prev) => ({
                 x: prev.x + delta.x,
                 y: prev.y + delta.y,
               }));
@@ -79,7 +93,7 @@ function HomePage({isDark, setIsDark}: Props) {
                   <img src={isDark ? "/icons/link-dark.svg" : "/icons/link-light.svg"} alt="picture" />
                   <span>ссылки</span>
                 </button>
-                <button>
+                <button onClick={() => { setIsWorksOpen(true); bringToFront("works"); }}>
                   <img src={isDark ? "/icons/folder-dark.svg" : "/icons/folder-light.svg"} alt="picture" />
                   <span>работы</span>
                 </button>
@@ -104,6 +118,13 @@ function HomePage({isDark, setIsDark}: Props) {
               zIndex={linksZ}
               isDark={isDark}
             />
+          )}
+          {isWorksOpen && (
+              <WorksWindow
+                  onClose={() => setIsWorksOpen(false)}
+                  position={worksPosition}
+                  zIndex={worksZ}
+              />
           )}
         </DndContext>
       </main>
